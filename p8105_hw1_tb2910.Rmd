@@ -42,3 +42,18 @@ as.numeric(pull(problem1_df,vec_factor))
 ```
 
 We are unable to convert a character into a numeric, however we are able to convert a logic and factor into numeric.
+
+# Problem 2
+
+Here's a **code chunk** that load the penguins dataset, and finds the mean of the flipper length. 
+```{r}
+data("penguins", package = "palmerpenguins")
+flipper_mean = mean(pull(penguins,flipper_length_mm), na.rm = TRUE)
+```
+
+The data in this dataset includes `r colnames(penguins)`. The size of dataset we have is `r nrow(penguins) * ncol(penguins)`. The mean flipper length is `r flipper_mean`.
+
+### Subsection 2: Graphing of flipper length and bill length
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+ggsave("scatter_plot.pdf", height = 4, width = 6)
