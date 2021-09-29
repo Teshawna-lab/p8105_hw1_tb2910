@@ -1,21 +1,44 @@
 ---
-title: "Simple document"
-output: html_document
+title: "Homework 1"
+output: github_document
 ---
 
-I'm an R Markdown document! 
+I'm an R Markdown document!
 
-# Section 1
-
-Here's a **code chunk** that samples from 
-a _normal distribution_:
-
-```{r}
-samp = rnorm(100)
-length(samp)
+```{r setup}
+library(tidyverse)
 ```
 
-# Section 2
+# Problem 1
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+Here's a **code chunk** that samples from 
+a _normal distribution_ with a random sample size of 10, a logical vector indicating whether elements of the sample are greater than 0, a character vector of length 10,a factor vector of length 10, with 3 different factor “levels”:
+
+```{r}
+problem1_df = tibble(
+  x = rnorm(10),
+  vec_log = x > 0,
+  vec_char = c("these","new","characters","are", "for", "homework","one","of", "data","science"),
+  vec_factor = factor(c("single","divorced","married","married","single","divorced","divorced","single","divorced","married")),
+)
+```
+
+### Subsection 2: Trying to take the mean of each variable 
+```{r}
+problem1_df
+mean(pull(problem1_df,x))
+mean(pull(problem1_df,vec_log))
+mean(pull(problem1_df,vec_char))
+mean(pull(problem1_df,vec_factor))
+```
+
+The mean of numbers and logical vectors is possible, however we can't take the mean of characters or factors. 
+
+### Subsection 3: Convert variable to numeric
+```{r}
+as.numeric(pull(problem1_df,vec_log))
+as.numeric(pull(problem1_df,vec_char))
+as.numeric(pull(problem1_df,vec_factor))
+```
+
+We are unable to convert a character into a numeric, however we are able to convert a logic and factor into numeric.
